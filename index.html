@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Insurance Consultation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="app-container glass-panel">
+        
+        <section id="welcome-screen" class="screen active fade-in">
+            <div class="logo-container">
+                <div class="glowing-orb"></div>
+                <h1>MAB Future AI</h1>
+                <p>Know Your Future</p>
+            </div>
+            <div class="welcome-text">
+                <h2>Discover Your Future.</h2>
+                <p>Experience the next generation of risk analysis and life protection.</p>
+            </div>
+            <button id="start-btn" class="neon-btn">START AI CONSULTATION</button>
+        </section>
+
+        <section id="chat-screen" class="screen hidden fade-in">
+            <div class="chat-header">
+                <h2>MAB Assistant</h2>
+                <span class="status">Online</span>
+            </div>
+            <div id="chat-box" class="chat-box">
+                </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your answer here..." autocomplete="off">
+                <button id="send-btn" class="icon-btn">➤</button>
+            </div>
+        </section>
+
+        <section id="scan-screen" class="screen hidden fade-in">
+            <div class="scan-container">
+                <video id="camera-feed" autoplay muted playsinline></video>
+                <div class="hud-overlay">
+                    <div class="hud-circle inner"></div>
+                    <div class="hud-circle outer"></div>
+                    <div class="scan-line"></div>
+                </div>
+                <div class="scan-ui">
+                    <h3 id="scan-text">Initializing AI Core...</h3>
+                    <div class="progress-bar-container">
+                        <div id="scan-progress" class="progress-bar"></div>
+                    </div>
+                    <p id="scan-percentage">0%</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-screen" class="screen hidden fade-in">
+            <video id="story-video" playsinline muted controls style="width: 100%; height: 100%; object-fit: cover;"></video>
+        </section>
+
+        <section id="recommendation-screen" class="screen hidden fade-in">
+            <div class="recommendation-header">
+                <h2>Simulation Complete</h2>
+                <p>Based on your profile, here is your protection blueprint.</p>
+            </div>
+            
+            <div id="dynamic-summary" class="summary-text glass-card">
+                </div>
+
+            <div class="cards-container">
+                <div class="glass-card plan-card">
+                    <h3>Family Shield</h3>
+                    <p>Comprehensive life coverage tailored to secure your dependents' future and replace lost income.</p>
+                </div>
+                <div class="glass-card plan-card">
+                    <h3>Wealth Guardian</h3>
+                    <p>Living benefits and critical illness protection to safeguard your monthly income.</p>
+                </div>
+            </div>
+
+            <button class="neon-btn" onclick="location.reload()">Talk to an Advisor</button>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
