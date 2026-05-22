@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI Insurance Consultation</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -29,21 +29,23 @@
                 <h2>MAB Assistant</h2>
                 <span class="status">Online</span>
             </div>
-            <div id="chat-box" class="chat-box">
-                </div>
-            <div class="chat-input-area">
+            <div id="chat-box" class="chat-box"></div>
+            
+            <form id="chat-form" class="chat-input-area" onsubmit="event.preventDefault();">
                 <input type="text" id="chat-input" placeholder="Type your answer here..." autocomplete="off">
-                <button id="send-btn" class="icon-btn">➤</button>
-            </div>
+                <button type="submit" id="send-btn" class="icon-btn">➤</button>
+            </form>
         </section>
 
         <section id="scan-screen" class="screen hidden fade-in">
             <div class="scan-container">
-                <video id="camera-feed" autoplay muted playsinline></video>
-                <div class="hud-overlay">
-                    <div class="hud-circle inner"></div>
-                    <div class="hud-circle outer"></div>
-                    <div class="scan-line"></div>
+                <div class="camera-wrapper">
+                    <video id="camera-feed" autoplay unmuted playsinline></video>
+                    <div class="hud-overlay">
+                        <div class="hud-circle inner"></div>
+                        <div class="hud-circle outer"></div>
+                        <div class="scan-line"></div>
+                    </div>
                 </div>
                 <div class="scan-ui">
                     <h3 id="scan-text">Initializing AI Core...</h3>
@@ -65,8 +67,7 @@
                 <p>Based on your profile, here is your protection blueprint.</p>
             </div>
             
-            <div id="dynamic-summary" class="summary-text glass-card">
-                </div>
+            <div id="dynamic-summary" class="summary-text glass-card"></div>
 
             <div class="cards-container">
                 <div class="glass-card plan-card">
