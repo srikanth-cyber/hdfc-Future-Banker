@@ -24,13 +24,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px; /* Added padding to prevent the panel from hitting screen edges on mobile */
+    padding: 15px;
     overflow-x: hidden;
 }
 
 /* Background Particles Simulation */
 .particles {
-    position: fixed; /* Changed to fixed so it stays in place during scrolls */
+    position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background-image: radial-gradient(circle at center, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
     z-index: 0;
@@ -39,8 +39,8 @@ body {
 .app-container {
     width: 100%;
     max-width: 600px;
-    height: 85vh; /* Balanced height for mobile keyboards */
-    min-height: 500px; /* Ensures UI doesn't collapse entirely */
+    height: 85vh;
+    min-height: 500px;
     position: relative;
     z-index: 1;
     display: flex;
@@ -68,14 +68,14 @@ body {
 
 /* Typography */
 h1, h2, h3 { font-family: 'Orbitron', sans-serif; font-weight: 700; }
-h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-blue); } /* Scaled down for mobile */
+h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-blue); }
 
 /* Buttons */
 .neon-btn {
     background: transparent;
     color: var(--neon-blue);
     border: 1px solid var(--neon-blue);
-    padding: 12px 24px; /* Slightly adjusted padding */
+    padding: 12px 24px;
     font-size: 1rem;
     font-family: 'Orbitron', sans-serif;
     border-radius: 8px;
@@ -84,7 +84,7 @@ h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
-    width: 100%; /* Full width on mobile by default */
+    width: 100%;
     max-width: 320px;
 }
 
@@ -102,8 +102,8 @@ h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-
     top: 0; left: 0;
     display: flex;
     flex-direction: column;
-    padding: 20px; /* Reduced padding for cleaner mobile layouts */
-    overflow-y: auto; /* Fallback for content overflow */
+    padding: 20px;
+    overflow: hidden; /* Restricts top-level viewport escaping layout errors */
 }
 .hidden { display: none !important; }
 .fade-in { animation: fadeIn 0.8s ease forwards; }
@@ -125,15 +125,39 @@ h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-
 }
 @keyframes pulse { from { transform: scale(0.8); opacity: 0.5; } to { transform: scale(1.2); opacity: 1; } }
 
-/* Chat Screen */
+/* =========================================
+   CHAT SCREEN - TABLET PC MODE FIXES
+========================================= */
+#chat-screen {
+    display: flex !important;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+#chat-screen.hidden {
+    display: none !important;
+}
+
 .chat-header {
-    text-align: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;
-    margin-bottom: 15px;
+    text-align: center; 
+    border-bottom: 1px solid var(--glass-border); 
+    padding-bottom: 12px;
+    margin-bottom: 10px;
+    flex-shrink: 0; /* Prevents text elements from collapsing */
 }
 .chat-header h2 { font-size: 1.1rem; color: var(--neon-blue); }
 .status { font-size: 0.8rem; color: #0f0; }
 
-.chat-box { flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px; }
+.chat-box { 
+    flex: 1 1 auto; 
+    overflow-y: auto; 
+    padding-right: 5px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px;
+    margin-bottom: 10px;
+}
 .chat-box::-webkit-scrollbar { width: 4px; }
 .chat-box::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 5px; }
 
@@ -141,15 +165,35 @@ h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-
 .ai-msg { background: rgba(0, 243, 255, 0.1); border: 1px solid var(--glass-border); align-self: flex-start; border-bottom-left-radius: 2px;}
 .user-msg { background: rgba(255, 255, 255, 0.1); align-self: flex-end; border-bottom-right-radius: 2px; }
 
+/* Fixed input row container layout */
 .chat-input-area {
-    display: flex; gap: 10px; margin-top: 15px;
+    display: flex; 
+    gap: 10px; 
+    margin-top: auto; 
+    padding-top: 5px;
+    flex-shrink: 0; /* Important: prevents parent layout from cutting input off */
 }
 #chat-input {
     flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
-    color: white; padding: 12px; border-radius: 8px; outline: none; font-family: 'Inter'; font-size: 16px; /* 16px prevents iOS auto-zoom on input focus */
+    color: white; padding: 12px; border-radius: 8px; outline: none; font-family: 'Inter'; font-size: 16px;
 }
 #chat-input:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0, 243, 255, 0.3); }
-.icon-btn { background: var(--neon-blue); border: none; color: #000; width: 45px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; }
+
+/* Structured button size overrides */
+.icon-btn { 
+    background: var(--neon-blue); 
+    border: none; 
+    color: #000; 
+    width: 45px; 
+    height: 45px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 1.1rem; 
+    flex-shrink: 0; /* Ensures the button never gets squished */
+}
 
 /* Typing Indicator */
 .typing-dots span { display: inline-block; width: 6px; height: 6px; background: var(--neon-blue); border-radius: 50%; margin: 0 2px; animation: bounce 1s infinite; }
@@ -190,7 +234,7 @@ h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-
 .plan-card p { font-size: 0.8rem; color: #cbd5e1; line-height: 1.4; }
 
 /* =========================================
-   AI SPEAKING EFFECT & UTILITIES
+   ANIMATIONS & UTILITIES
 ========================================= */
 .logo-container.speaking .glowing-orb {
     animation: pulse 1s infinite alternate, aiSpeak 0.35s infinite alternate;
@@ -210,7 +254,7 @@ h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-
 @keyframes glowText { from { opacity: 0.8; } to { opacity: 1; } }
 
 /* =========================================
-   MEDIA QUERIES (TABLETS & LARGE PHONES)
+   RESPONSIVE DESIGN (TABLETS / RESPONSIVE)
 ========================================= */
 @media (min-width: 480px) {
     h1 { font-size: 2.5rem; }
