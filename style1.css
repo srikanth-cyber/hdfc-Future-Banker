@@ -1,0 +1,225 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght=400;700&family=Inter:wght=300;400;600&display=swap');
+
+:root {
+    --bg-dark: #050914;
+    --neon-blue: #00f3ff;
+    --neon-cyan: #008cff;
+    --text-main: #e0e6ed;
+    --glass-bg: rgba(10, 20, 40, 0.6);
+    --glass-border: rgba(0, 243, 255, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px; /* Added padding to prevent the panel from hitting screen edges on mobile */
+    overflow-x: hidden;
+}
+
+/* Background Particles Simulation */
+.particles {
+    position: fixed; /* Changed to fixed so it stays in place during scrolls */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(circle at center, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 600px;
+    height: 85vh; /* Balanced height for mobile keyboards */
+    min-height: 500px; /* Ensures UI doesn't collapse entirely */
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+/* Glassmorphism Defaults */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+/* Typography */
+h1, h2, h3 { font-family: 'Orbitron', sans-serif; font-weight: 700; }
+h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-blue); } /* Scaled down for mobile */
+
+/* Buttons */
+.neon-btn {
+    background: transparent;
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    padding: 12px 24px; /* Slightly adjusted padding */
+    font-size: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
+    width: 100%; /* Full width on mobile by default */
+    max-width: 320px;
+}
+
+.neon-btn:hover {
+    background: var(--neon-blue);
+    color: var(--bg-dark);
+    box-shadow: 0 0 30px var(--neon-blue), inset 0 0 10px #fff;
+}
+
+/* Screen Management */
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Reduced padding for cleaner mobile layouts */
+    overflow-y: auto; /* Fallback for content overflow */
+}
+.hidden { display: none !important; }
+.fade-in { animation: fadeIn 0.8s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Welcome Screen */
+#welcome-screen { align-items: center; justify-content: center; text-align: center; }
+.logo-container { margin-bottom: 30px; }
+.welcome-text { margin-bottom: 30px; }
+.welcome-text h2 { font-size: 1.4rem; margin-bottom: 10px; }
+
+.glowing-orb {
+    width: 70px; height: 70px;
+    background: radial-gradient(circle, var(--neon-blue), transparent);
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+    filter: blur(10px);
+    animation: pulse 2s infinite alternate;
+}
+@keyframes pulse { from { transform: scale(0.8); opacity: 0.5; } to { transform: scale(1.2); opacity: 1; } }
+
+/* Chat Screen */
+.chat-header {
+    text-align: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.chat-header h2 { font-size: 1.1rem; color: var(--neon-blue); }
+.status { font-size: 0.8rem; color: #0f0; }
+
+.chat-box { flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px; }
+.chat-box::-webkit-scrollbar { width: 4px; }
+.chat-box::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 5px; }
+
+.message { max-width: 85%; padding: 12px 14px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; opacity: 0; animation: fadeIn 0.3s ease forwards;}
+.ai-msg { background: rgba(0, 243, 255, 0.1); border: 1px solid var(--glass-border); align-self: flex-start; border-bottom-left-radius: 2px;}
+.user-msg { background: rgba(255, 255, 255, 0.1); align-self: flex-end; border-bottom-right-radius: 2px; }
+
+.chat-input-area {
+    display: flex; gap: 10px; margin-top: 15px;
+}
+#chat-input {
+    flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+    color: white; padding: 12px; border-radius: 8px; outline: none; font-family: 'Inter'; font-size: 16px; /* 16px prevents iOS auto-zoom on input focus */
+}
+#chat-input:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0, 243, 255, 0.3); }
+.icon-btn { background: var(--neon-blue); border: none; color: #000; width: 45px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; }
+
+/* Typing Indicator */
+.typing-dots span { display: inline-block; width: 6px; height: 6px; background: var(--neon-blue); border-radius: 50%; margin: 0 2px; animation: bounce 1s infinite; }
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* Scan Screen */
+.scan-container { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#camera-feed { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; filter: contrast(1.2) brightness(0.8) grayscale(0.2); }
+
+.hud-overlay { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 240px; height: 240px; pointer-events: none; }
+.hud-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; box-sizing: border-box; }
+.hud-circle.outer { border: 2px dashed var(--neon-blue); animation: rotate 15s linear infinite; }
+.hud-circle.inner { border: 2px solid rgba(0, 243, 255, 0.3); width: 200px; height: 200px; top: 20px; left: 20px; border-top-color: transparent; animation: rotate 5s linear infinite reverse; }
+.scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); animation: scanDown 2s ease-in-out infinite alternate; }
+
+.scan-ui { text-align: center; margin-top: 25px; width: 100%; }
+#scan-text { color: var(--neon-blue); font-size: 0.95rem; margin-bottom: 15px; letter-spacing: 1px; }
+.progress-bar-container { width: 80%; height: 4px; background: rgba(255,255,255,0.1); margin: 0 auto; border-radius: 2px; overflow: hidden; }
+.progress-bar { width: 0%; height: 100%; background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); transition: width 0.3s; }
+#scan-percentage { margin-top: 10px; font-family: 'Orbitron'; font-weight: bold; }
+
+@keyframes rotate { 100% { transform: rotate(360deg); } }
+@keyframes scanDown { 0% { top: 0; opacity: 0; } 50% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+/* Video Screen */
+#video-screen { padding: 0; background: #000; justify-content: center;}
+
+/* Recommendations Screen */
+#recommendation-screen { justify-content: space-between; align-items: center; }
+.recommendation-header { text-align: center; margin-bottom: 10px; }
+.recommendation-header h2 { font-size: 1.4rem; color: var(--neon-blue); }
+.summary-text { font-size: 0.9rem; color: #a0aec0; margin-bottom: 15px; line-height: 1.5; text-align: left; width: 100%; }
+.cards-container { display: flex; flex-direction: column; gap: 10px; width: 100%; overflow-y: auto; margin-bottom: 15px; }
+.plan-card { padding: 15px; margin-bottom: 0; }
+.plan-card h3 { color: var(--neon-blue); font-size: 1rem; margin-bottom: 6px; }
+.plan-card p { font-size: 0.8rem; color: #cbd5e1; line-height: 1.4; }
+
+/* =========================================
+   AI SPEAKING EFFECT & UTILITIES
+========================================= */
+.logo-container.speaking .glowing-orb {
+    animation: pulse 1s infinite alternate, aiSpeak 0.35s infinite alternate;
+    box-shadow: 0 0 20px #00f3ff, 0 0 40px #00f3ff;
+}
+
+@keyframes aiSpeak {
+    from { transform: scale(1); filter: blur(10px); }
+    to { transform: scale(1.2); filter: blur(15px); }
+}
+
+.ai-title {
+    animation: glowText 2s infinite alternate;
+    text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+}
+
+@keyframes glowText { from { opacity: 0.8; } to { opacity: 1; } }
+
+/* =========================================
+   MEDIA QUERIES (TABLETS & LARGE PHONES)
+========================================= */
+@media (min-width: 480px) {
+    h1 { font-size: 2.5rem; }
+    .welcome-text h2 { font-size: 1.8rem; }
+    .app-container { height: 90vh; }
+    .message { max-width: 75%; }
+    #camera-feed { width: 280px; height: 280px; }
+    .hud-overlay { width: 300px; height: 300px; top: 43%; }
+    .hud-circle.inner { width: 260px; height: 260px; }
+    .cards-container { flex-direction: row; gap: 15px; }
+    .plan-card { flex: 1; }
+}
