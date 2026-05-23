@@ -24,15 +24,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 10px;
-    /* Changed from hidden to auto to allow the page to scroll if content breaks out */
-    overflow-y: auto; 
+    padding: 15px; /* Added padding to prevent the panel from hitting screen edges on mobile */
     overflow-x: hidden;
 }
 
 /* Background Particles Simulation */
 .particles {
-    position: fixed; /* Fixed so it stays locked in background while scrolling */
+    position: fixed; /* Changed to fixed so it stays in place during scrolls */
     top: 0; left: 0; width: 100%; height: 100%;
     background-image: radial-gradient(circle at center, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
     z-index: 0;
@@ -40,17 +38,15 @@ body {
 
 .app-container {
     width: 100%;
-    max-width: 550px;
-    /* Uses dynamic bounds so it can shrink or stretch depending on layout needs */
-    height: 85vh;
-    max-height: 800px;
-    min-height: 500px;
+    max-width: 600px;
+    height: 85vh; /* Balanced height for mobile keyboards */
+    min-height: 500px; /* Ensures UI doesn't collapse entirely */
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
     border-radius: 24px;
-    overflow: hidden; /* Keeps the outer card corners clean */
+    overflow: hidden;
 }
 
 /* Glassmorphism Defaults */
@@ -66,20 +62,20 @@ body {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
 }
 
 /* Typography */
 h1, h2, h3 { font-family: 'Orbitron', sans-serif; font-weight: 700; }
-h1 { color: var(--neon-blue); font-size: 1.8rem; text-shadow: 0 0 20px var(--neon-blue); }
+h1 { color: var(--neon-blue); font-size: 2rem; text-shadow: 0 0 20px var(--neon-blue); } /* Scaled down for mobile */
 
 /* Buttons */
 .neon-btn {
     background: transparent;
     color: var(--neon-blue);
     border: 1px solid var(--neon-blue);
-    padding: 12px 24px;
+    padding: 12px 24px; /* Slightly adjusted padding */
     font-size: 1rem;
     font-family: 'Orbitron', sans-serif;
     border-radius: 8px;
@@ -88,8 +84,8 @@ h1 { color: var(--neon-blue); font-size: 1.8rem; text-shadow: 0 0 20px var(--neo
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
-    width: 100%;
-    flex-shrink: 0;
+    width: 100%; /* Full width on mobile by default */
+    max-width: 320px;
 }
 
 .neon-btn:hover {
@@ -100,201 +96,132 @@ h1 { color: var(--neon-blue); font-size: 1.8rem; text-shadow: 0 0 20px var(--neo
 
 /* Screen Management */
 .screen {
-    position: absolute;
-    top: 0; left: 0;
     width: 100%;
     height: 100%;
+    position: absolute;
+    top: 0; left: 0;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-    /* Added scrollability inside screens if components ever exceed heights */
-    overflow-y: auto;
-    overflow-x: hidden;
+    padding: 20px; /* Reduced padding for cleaner mobile layouts */
+    overflow-y: auto; /* Fallback for content overflow */
 }
 .hidden { display: none !important; }
-.fade-in { animation: fadeIn 0.5s ease forwards; }
+.fade-in { animation: fadeIn 0.8s ease forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Welcome Screen */
 #welcome-screen { align-items: center; justify-content: center; text-align: center; }
-.logo-container { margin-bottom: 20px; flex-shrink: 0; }
-.welcome-text { margin-bottom: 25px; flex-shrink: 0; }
-.welcome-text h2 { font-size: 1.3rem; margin-bottom: 8px; }
-.welcome-text p { font-size: 0.9rem; opacity: 0.8; }
+.logo-container { margin-bottom: 30px; }
+.welcome-text { margin-bottom: 30px; }
+.welcome-text h2 { font-size: 1.4rem; margin-bottom: 10px; }
 
-.glowing-orb {
+
+
+/*.glowing-orb {
     width: 70px; height: 70px;
     background: radial-gradient(circle, var(--neon-blue), transparent);
     border-radius: 50%;
-    margin: 0 auto 15px auto;
-    filter: blur(10px);
+    margin: 0 auto 20px auto;
+    filter: var(--glass-bg)
     animation: pulse 2s infinite alternate;
 }
 @keyframes pulse { from { transform: scale(0.8); opacity: 0.5; } to { transform: scale(1.2); opacity: 1; } }
-
-/* =========================================
-   SCROLLABLE CHAT DESIGN 
-========================================= */
-#chat-screen {
-    height: 100%;
-    display: flex !important;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden; /* Keeps scrollbars strictly localized to the message container */
-}
-#chat-screen.hidden { display: none !important; }
-
+*/
+/* Chat Screen */
 .chat-header {
-    text-align: center; 
-    border-bottom: 1px solid var(--glass-border); 
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    flex-shrink: 0;
+    text-align: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 .chat-header h2 { font-size: 1.1rem; color: var(--neon-blue); }
 .status { font-size: 0.8rem; color: #0f0; }
 
-.chat-box { 
-    flex: 1 1 auto; 
-    overflow-y: auto; 
-    padding-right: 5px; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px;
-    margin-bottom: 10px;
-}
+.chat-box { flex: 1; overflow-y: auto; padding-right: 5px; display: flex; flex-direction: column; gap: 15px; }
 .chat-box::-webkit-scrollbar { width: 4px; }
 .chat-box::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 5px; }
 
-.message { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; opacity: 0; animation: fadeIn 0.3s ease forwards;}
+.message { max-width: 85%; padding: 12px 14px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; opacity: 0; animation: fadeIn 0.3s ease forwards;}
 .ai-msg { background: rgba(0, 243, 255, 0.1); border: 1px solid var(--glass-border); align-self: flex-start; border-bottom-left-radius: 2px;}
 .user-msg { background: rgba(255, 255, 255, 0.1); align-self: flex-end; border-bottom-right-radius: 2px; }
 
-/* Sticky Footer Input Area */
 .chat-input-area {
-    display: flex !important; 
-    gap: 10px; 
-    margin-top: auto; 
-    padding-top: 5px;
-    flex-shrink: 0 !important; 
-    height: 48px; 
+    display: flex; gap: 10px; margin-top: 15px;
 }
-
 #chat-input {
-    flex: 1; 
-    background: rgba(0,0,0,0.4); 
-    border: 1px solid var(--glass-border);
-    color: white; 
-    padding: 0 12px; 
-    border-radius: 8px; 
-    outline: none; 
-    font-family: 'Inter'; 
-    font-size: 16px; 
-    height: 100%;
+    flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+    color: white; padding: 12px; border-radius: 8px; outline: none; font-family: 'Inter'; font-size: 16px; /* 16px prevents iOS auto-zoom on input focus */
 }
 #chat-input:focus { border-color: var(--neon-blue); box-shadow: 0 0 10px rgba(0, 243, 255, 0.3); }
-
-.icon-btn { 
-    background: var(--neon-blue); 
-    border: none; 
-    color: #000; 
-    width: 48px; 
-    height: 48px; 
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px; 
-    cursor: pointer; 
-    font-size: 1.1rem; 
-    flex-shrink: 0 !important;
-}
+.icon-btn { background: var(--neon-blue); border: none; color: #000; width: 45px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; }
 
 /* Typing Indicator */
-.typing-dots { display: flex; align-items: center; height: 16px; padding: 2px 0; }
 .typing-dots span { display: inline-block; width: 6px; height: 6px; background: var(--neon-blue); border-radius: 50%; margin: 0 2px; animation: bounce 1s infinite; }
 .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
 .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
-/* Scan Screen Layout System */
-.scan-container { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.camera-wrapper { position: relative; width: 180px; height: 180px; margin-bottom: 20px; flex-shrink: 0; }
-#camera-feed { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: contrast(1.2) brightness(0.8) grayscale(0.2); }
+/* Scan Screen */
+.scan-container { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#camera-feed { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; filter: contrast(1.2) brightness(0.8) grayscale(0.2); }
 
-.hud-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-.hud-circle { position: absolute; top: -10px; left: -10px; width: calc(100% + 20px); height: calc(100% + 20px); border-radius: 50%; box-sizing: border-box; }
+.hud-overlay { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); width: 240px; height: 240px; pointer-events: none; }
+.hud-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; box-sizing: border-box; }
 .hud-circle.outer { border: 2px dashed var(--neon-blue); animation: rotate 15s linear infinite; }
-.hud-circle.inner { border: 2px solid rgba(0, 243, 255, 0.3); width: 100%; height: 100%; top: 0; left: 0; border-top-color: transparent; animation: rotate 5s linear infinite reverse; }
+.hud-circle.inner { border: 2px solid rgba(0, 243, 255, 0.3); width: 200px; height: 200px; top: 20px; left: 20px; border-top-color: transparent; animation: rotate 5s linear infinite reverse; }
 .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); animation: scanDown 2s ease-in-out infinite alternate; }
 
-.scan-ui { text-align: center; width: 100%; flex-shrink: 0; }
-#scan-text { color: var(--neon-blue); font-size: 0.9rem; margin-bottom: 10px; letter-spacing: 1px; }
+.scan-ui { text-align: center; margin-top: 25px; width: 100%; }
+#scan-text { color: var(--neon-blue); font-size: 0.95rem; margin-bottom: 15px; letter-spacing: 1px; }
 .progress-bar-container { width: 80%; height: 4px; background: rgba(255,255,255,0.1); margin: 0 auto; border-radius: 2px; overflow: hidden; }
 .progress-bar { width: 0%; height: 100%; background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); transition: width 0.3s; }
-#scan-percentage { margin-top: 8px; font-family: 'Orbitron'; font-weight: bold; font-size: 0.9rem; }
+#scan-percentage { margin-top: 10px; font-family: 'Orbitron'; font-weight: bold; }
 
 @keyframes rotate { 100% { transform: rotate(360deg); } }
 @keyframes scanDown { 0% { top: 0; opacity: 0; } 50% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
 
 /* Video Screen */
-#video-screen { padding: 0; background: #000; justify-content: center; overflow: hidden; }
+#video-screen { padding: 0; background: #000; justify-content: center;}
+
+/* Recommendations Screen */
+#recommendation-screen { justify-content: space-between; align-items: center; }
+.recommendation-header { text-align: center; margin-bottom: 10px; }
+.recommendation-header h2 { font-size: 1.4rem; color: var(--neon-blue); }
+.summary-text { font-size: 0.9rem; color: #a0aec0; margin-bottom: 15px; line-height: 1.5; text-align: left; width: 100%; }
+.cards-container { display: flex; flex-direction: column; gap: 10px; width: 100%; overflow-y: auto; margin-bottom: 15px; }
+.plan-card { padding: 15px; margin-bottom: 0; }
+.plan-card h3 { color: var(--neon-blue); font-size: 1rem; margin-bottom: 6px; }
+.plan-card p { font-size: 0.8rem; color: #cbd5e1; line-height: 1.4; }
 
 /* =========================================
-   SCROLLABLE RECOMMENDATIONS DESIGN
-========================================= */
-#recommendation-screen { 
-    justify-content: flex-start; 
-    gap: 12px;
-}
-.recommendation-header { text-align: center; flex-shrink: 0; }
-.recommendation-header h2 { font-size: 1.3rem; color: var(--neon-blue); }
-
-.summary-text { 
-    font-size: 0.85rem; 
-    color: #a0aec0; 
-    line-height: 1.4; 
-    text-align: left; 
-    flex-shrink: 0; /* Keeps it structured alongside card arrays */
-}
-.cards-container { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
-    width: 100%; 
-    flex-shrink: 0;
-}
-.plan-card { padding: 12px; margin-bottom: 0; }
-.plan-card h3 { color: var(--neon-blue); font-size: 0.95rem; margin-bottom: 4px; }
-.plan-card p { font-size: 0.8rem; color: #cbd5e1; line-height: 1.3; }
-
-/* =========================================
-   AI VOICE ANIMATIONS
+   AI SPEAKING EFFECT & UTILITIES
 ========================================= */
 .logo-container.speaking .glowing-orb {
     animation: pulse 1s infinite alternate, aiSpeak 0.35s infinite alternate;
     box-shadow: 0 0 20px #00f3ff, 0 0 40px #00f3ff;
 }
-@keyframes aiSpeak { from { transform: scale(1); filter: blur(10px); } to { transform: scale(1.15); filter: blur(14px); } }
 
-/* =========================================
-   RESPONSIVE DESIGN (TABLETS / RESPONSIVE)
-========================================= */
-@media (min-width: 481px) {
-    h1 { font-size: 2.2rem; }
-    .welcome-text h2 { font-size: 1.6rem; }
-    .app-container { height: 80vh; max-width: 600px; }
-    .message { max-width: 75%; }
-    .camera-wrapper { width: 240px; height: 240px; }
-    .cards-container { flex-direction: row; gap: 12px; }
-    .plan-card { flex: 1; }
+@keyframes aiSpeak {
+    from { transform: scale(1); filter: blur(10px); }
+    to { transform: scale(1.2); filter: blur(15px); }
 }
 
-/* Extreme Low Height Screen Safe Catch (e.g., tight landscape/PC windows) */
-@media (max-height: 580px) {
-    .app-container {
-        height: 95vh;
-    }
-    .glowing-orb { width: 45px; height: 45px; }
-    .camera-wrapper { width: 130px; height: 130px; margin-bottom: 10px; }
+.ai-title {
+    animation: glowText 2s infinite alternate;
+    text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff;
+}
+
+@keyframes glowText { from { opacity: 0.8; } to { opacity: 1; } }
+
+/* =========================================
+   MEDIA QUERIES (TABLETS & LARGE PHONES)
+========================================= */
+@media (min-width: 480px) {
+    h1 { font-size: 2.5rem; }
+    .welcome-text h2 { font-size: 1.8rem; }
+    .app-container { height: 90vh; }
+    .message { max-width: 75%; }
+    #camera-feed { width: 280px; height: 280px; }
+    .hud-overlay { width: 300px; height: 300px; top: 43%; }
+    .hud-circle.inner { width: 260px; height: 260px; }
+    .cards-container { flex-direction: row; gap: 15px; }
+    .plan-card { flex: 1; }
 }
