@@ -10,7 +10,7 @@ const state = {
 
 // Base questions
 const questions = [
-    { key: "name", text: "Hello. I am MAB AI. To begin your future life simulation, please tell me your name." },
+    { key: "name", text: "Hello. I am Hdfc Future AI. To begin your future life simulation, please tell me your name." },
     { key: "age", text: "Nice to meet you, {name}. How old are you?" },
     { key: "maritalStatus", text: "What is your current marital status? (Single, Married, Divorced, etc.)" },
     { key: "children", text: "How many children do you have?" },
@@ -43,7 +43,7 @@ const storyVideo = document.getElementById('story-video');
 function speakWelcomeMessage() {
 
     const message = new SpeechSynthesisUtterance(
-        "Welcome to MAB AI. I am happy to see you here, as you decided to protect yourself from financial crises."
+        "Welcome to HDFC Future AI. I am happy to see you here, as you decided to protect yourself from financial crises."
     );
 
     message.rate = 0.92;
