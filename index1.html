@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Insurance Consultation</title>
     <link rel="stylesheet" href="style1.css">
 </head>
@@ -13,39 +13,37 @@
         
         <section id="welcome-screen" class="screen active fade-in">
             <div class="logo-container">
-                <div class="glowing-orb"></div>
+                <div class=""><img src="68d0bcaf.png" style="width: 100px; height: 100px;" class="glowing-orb"></img></div>
                 <h1>HDFC Future AI</h1>
                 <p>Know Your Future</p>
             </div>
             <div class="welcome-text">
-                <h2>Step Into Tomorrow With Hdfc Guidance</h2>
-                <p>Experience the next generation of risk analysis,life protection and General Protection.</p>
+                <h2>Step Into Tomorrow</h2>
+                <p>Experience the next generation of risk analysis and life protection.</p>
             </div>
-            <button id="start-btn" class="neon-btn">START</button>
+            <button id="start-btn" class="neon-btn">START AI CONSULTATION</button>
         </section>
 
         <section id="chat-screen" class="screen hidden fade-in">
             <div class="chat-header">
-                <h2>HDFC Future Assistant</h2>
+                <h2>Hdfc Assistant</h2>
                 <span class="status">Online</span>
             </div>
-            <div id="chat-box" class="chat-box"></div>
-            
-            <form id="chat-form" class="chat-input-area" onsubmit="event.preventDefault();">
+            <div id="chat-box" class="chat-box">
+                </div>
+            <div class="chat-input-area">
                 <input type="text" id="chat-input" placeholder="Type your answer here..." autocomplete="off">
-                <button type="submit" id="send-btn" class="icon-btn">➤</button>
-            </form>
+                <button id="send-btn" class="icon-btn">➤</button>
+            </div>
         </section>
 
         <section id="scan-screen" class="screen hidden fade-in">
             <div class="scan-container">
-                <div class="camera-wrapper">
-                    <video id="camera-feed" autoplay unmuted playsinline></video>
-                    <div class="hud-overlay">
-                        <div class="hud-circle inner"></div>
-                        <div class="hud-circle outer"></div>
-                        <div class="scan-line"></div>
-                    </div>
+                <video id="camera-feed" autoplay unmuted playsinline></video>
+                <div class="hud-overlay">
+                    <div class="hud-circle inner"></div>
+                    <div class="hud-circle outer"></div>
+                    <div class="scan-line"></div>
                 </div>
                 <div class="scan-ui">
                     <h3 id="scan-text">Initializing AI Core...</h3>
@@ -67,7 +65,8 @@
                 <p>Based on your profile, here is your protection blueprint.</p>
             </div>
             
-            <div id="dynamic-summary" class="summary-text glass-card"></div>
+            <div id="dynamic-summary" class="summary-text glass-card">
+                </div>
 
             <div class="cards-container">
                 <div class="glass-card plan-card">
